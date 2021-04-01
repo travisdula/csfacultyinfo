@@ -2,10 +2,10 @@ import requests
 import json
 from bs4 import BeautifulSoup
 
-url = 'https://cs.utdallas.edu/people/faculty/'
+URL = 'https://cs.utdallas.edu/people/faculty/'
 
 def main():
-    req = requests.get(url)
+    req = requests.get(URL)
     soup = BeautifulSoup(req.text, features='html5lib').tbody
     profs_html = soup.find_all('tr')
     profs_dict = { tr.td.find_all('a')[-1].text : {
@@ -19,8 +19,6 @@ def main():
         }
     with open('out.json', 'w') as f:
         f.write(json.dumps(profs_dict))
-
-    
 
 if __name__ == '__main__':
     main()
